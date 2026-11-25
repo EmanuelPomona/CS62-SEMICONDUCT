@@ -20,10 +20,56 @@ public class DataLoader {
             if (!"timestamp,ticker,open,high,low,close,volume".equals(header)) {
                 throw new IOException("Unexpected CSV header.");
             }
-            
+
             String line;
+            int lineNumber = 1;
+
+            while ((line = reader.readLine()) != null) {
+
+                lineNumber++;
+
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+
+                String[] values = line.split(",", -1);
+
+                if (values.length != 7) {
+                    throw new IOException("Invalid CSV row at line " + lineNumber);
+                }
+
+                Instant timestamp = Instant.parse(values[0]);
+                String ticker = values[1].trim();
+                double close = Double.parseDouble(values[5]);
+
+                if (ticker.isEmpty() || !Double.isFinite(close) || close <= 0) {
+                    throw new IOException("Invalid stock data at line " + lineNumber);
+                }
+
+                PricePoint point = new PricePoint (timestamp, close);
+
+                if (!stockData.containsKey(ticker)) {
+                    stockData.put(ticker, new ArrayList<>());
+                }
+
+                stockData.get(ticker).add(point);
+            }
 
         }
+
+        for (ArrayList<PricePoint> prices : stockData.values()) {
+            prices.sort(Comparator.comparing(PricePoint::getTimestamp));
+
+            for (int i = 1; i < prices.size(); i++) {
+                if (prices.get(i).getTimestamp().equals(prices.get(i-1).getTimestamp())) {
+                    throw new IOException("Duplicate timestamp.");
+                }
+            } 
+        }
+
+        return stockData;
     }
+
+    public stati
     
 }

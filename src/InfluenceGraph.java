@@ -64,7 +64,6 @@ public class InfluenceGraph {
         addVertex(source);
         addVertex(destination);
 
-        // Replace any existing edge between the same pair.
         removeEdge(source, destination);
 
         outgoing.get(source).add(edge);

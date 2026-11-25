@@ -8,9 +8,23 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 
-
+/**
+ * 
+ * DataLoader Class loads historical stock prices from the CSV file into a HashMap
+ */
 public class DataLoader {
 
+    /**
+     * Loads stock price histories organized by ticker symbol.
+     * Reads one CSV row then extracts the timestamp, ticker, and closing price.
+     * Then it creates a PricePoint Object and if the ticker exist in the Hashmap then it retrieves
+     * the existing ArrayList but if it doesn't have one already it creates a new ArrayList.
+     * Then it adds the PricePoint to the ArrayList.
+     * 
+     * @param filePath
+     * @return
+     * @throws IOException
+     */
     public static HashMap<String, ArrayList<PricePoint>> loadData(String filePath) throws IOException {
         HashMap<String, ArrayList<PricePoint>> stockData = new HashMap<>();
 

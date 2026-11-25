@@ -4,6 +4,20 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 
+ * CorrelationCalculator Class calculates lead-lag correlations between stock returns.
+ * Essentially it retrieves Stock X's return and compares it with Stock Y's return 30 minutes later.
+ * We map the return of X to the return of Y's 30 minutes later to see if there is a correlation between the two but ONLY 
+ * in one direction. We are able to calculate the correlation using a popular mathematical formula (Pearson's correlation formula).
+ * We calculate the correlation for both directions and independently because the relationship going one way could be different from just the inverse of that.
+ * Additionally here is how we are interpreting the correlation: 
+ *   1.0 = Perfect positive
+ *   0.5 = positive
+ *   0.0 = none
+ * - 0.5 = negative
+ * - 1.0 = Perfect negative
+ */
 public class CorrelationCalculator {
 
     private static final long LAG_MINUTES = 30;

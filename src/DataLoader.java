@@ -70,6 +70,34 @@ public class DataLoader {
         return stockData;
     }
 
-    public stati
+    public static void main(String[] args) throws IOException {
+        HashMap<String, ArrayList<PricePoint>> stockData = loadData("data/semiconductor_prices.csv");
+
+        int totalRecords = 0;
+
+        ArrayList<String> tickers = new ArrayList<>(stockData.keySet());
+
+        Collections.sort(tickers);
+
+        System.out.println("DATA LOADING COMPLETE");
+        System.out.println("==============================");
+        System.out.println("Total assets: " + stockData.size());
+
+        for (String ticker : tickers) {
+
+            int count = stockData.get(ticker).size();
+            System.out.println(ticker + ": " + count + " records");
+
+            totalRecords += count;
+        }
+
+        System.out.println("==============================");
+        System.out.println("Total records: " + totalRecords);
+
+        if (totalRecords < 1000) {
+            throw new IOException("Insufficient dataset size.");
+        }
+
+    }
     
 }

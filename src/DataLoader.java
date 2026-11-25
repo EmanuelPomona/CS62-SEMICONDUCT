@@ -21,9 +21,9 @@ public class DataLoader {
      * the existing ArrayList but if it doesn't have one already it creates a new ArrayList.
      * Then it adds the PricePoint to the ArrayList.
      * 
-     * @param filePath
-     * @return
-     * @throws IOException
+     * @param filePath the path to the CSV file
+     * @return a map of tickers to chronological price histories
+     * @throws IOException if the file cannot be read/accessed
      */
     public static HashMap<String, ArrayList<PricePoint>> loadData(String filePath) throws IOException {
         HashMap<String, ArrayList<PricePoint>> stockData = new HashMap<>();

@@ -1,5 +1,9 @@
 import java.time.Instant;
 
+/**
+ * 
+ * PricePoint Class represents a stock's closing price at a specific timestamp.
+ */
 public class PricePoint {
 
     private final Instant timestamp;

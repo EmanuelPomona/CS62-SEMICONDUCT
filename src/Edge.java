@@ -1,6 +1,6 @@
 /**
  *
- * Edge Class represents a directed relationship between two stocks.
+ * The Edge Class represents a directed relationship between two stocks.
  * The source stock is the potential leader, the destination stock is the
  * potential follower (its return 30 minutes later), and the weight is the
  * lead-lag Pearson correlation between them.
